@@ -38,7 +38,10 @@ export default tseslint.config([
   {
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
       parserOptions: {
         ecmaFeatures: { jsx: true },
       },
@@ -96,9 +99,6 @@ export default tseslint.config([
         version: 'detect',
       },
       'import/resolver': {
-        node: {
-          extensions: ['.ts', '.tsx', '.js', '.jsx', '.d.ts'],
-        },
         typescript: {
           alwaysTryTypes: true,
           project: './tsconfig.json',
