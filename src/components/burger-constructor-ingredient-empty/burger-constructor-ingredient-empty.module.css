@@ -1,0 +1,30 @@
+.main {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 536px;
+  min-height: 80px;
+  margin-left: 35px;
+  padding: 16px 24px;
+  color: #f2f2f3;
+  font-size: 16px;
+  line-height: 24px;
+  background: #2f2f37;
+  border-radius: 40px;
+}
+
+.span {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  margin-right: 20px;
+  line-height: 24px;
+  text-align: left;
+}
