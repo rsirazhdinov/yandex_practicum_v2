@@ -42,7 +42,7 @@ export default function BurgerConstructor() {
     setOrderDetailsModalVisible(true);
     const ingredientsIdArray = [
       bun?._id,
-      ...[ingredients?.map((item) => item._id)],
+      ...(ingredients?.map((item) => item._id) ?? []),
       bun?._id,
     ];
     dispatch(saveOrderAction(ingredientsIdArray));

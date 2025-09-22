@@ -1,22 +1,35 @@
-const API_URL = 'https://norma.nomoreparties.space/api';
+const BASE_URL = 'https://norma.nomoreparties.space/api/';
 
+// создаем функцию проверки ответа на `ok`
 const checkResponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-};
-export const fetchIngredients = () => {
-  return fetch(`${API_URL}/ingredients`)
-    .then(checkResponse)
-    .then((data) => {
-      if (data?.success) {
-        return data.data;
-      } else {
-        return Promise.reject(data);
-      }
-    });
+  if (res.ok) {
+    return res.json();
+  }
+  // не забываем выкидывать ошибку, чтобы она попала в `catch`
+  return Promise.reject(`Ошибка ${res.status}`);
 };
 
-export const saveOrder = (ingredientsIdArr) => {
-  return fetch(`${API_URL}/orders`, {
+// создаем функцию проверки на `success`
+const checkSuccess = (res) => {
+  if (res && res.success) {
+    return res;
+  }
+  // не забываем выкидывать ошибку, чтобы она попала в `catch`
+  return Promise.reject(`Ответ не success: ${res}`);
+};
+
+// создаем универсальную фукнцию запроса с проверкой ответа и `success`
+// В вызов приходит `endpoint`(часть урла, которая идет после базового) и опции
+const request = (endpoint, options) => {
+  // а также в ней базовый урл сразу прописывается, чтобы не дублировать в каждом запросе
+  return fetch(`${BASE_URL}${endpoint}`, options).then(checkResponse).then(checkSuccess);
+};
+
+// export const fetchIngredients = () => request('ingredients');
+export const fetchIngredients = () => request('ingredients');
+
+export const saveOrder = (ingredientsIdArr) =>
+  request('orders', {
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -25,13 +38,4 @@ export const saveOrder = (ingredientsIdArr) => {
     body: JSON.stringify({
       ingredients: ingredientsIdArr,
     }),
-  })
-    .then(checkResponse)
-    .then((data) => {
-      if (data?.success) {
-        return data;
-      } else {
-        return Promise.reject(data);
-      }
-    });
-};
+  });

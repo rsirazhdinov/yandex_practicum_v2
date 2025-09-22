@@ -8,8 +8,8 @@ import orderDetailsStyles from './order-details.module.css';
 export default function OrderDetails() {
   const { order, saveOrderRequest, saveOrderFailed } = useSelector((store) => ({
     order: store?.order?.saveOrderData?.order?.number,
-    saveOrderRequest: store?.saveOrderRequest,
-    saveOrderFailed: store?.saveOrderFailed,
+    saveOrderRequest: store?.order?.saveOrderRequest,
+    saveOrderFailed: store?.order?.saveOrderFailed,
   }));
   if (saveOrderRequest) {
     return (

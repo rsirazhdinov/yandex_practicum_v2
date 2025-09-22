@@ -19,7 +19,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          ingredients: [...[state?.ingredients, action.payload]],
+          ingredients: [...state.ingredients, action.payload],
         };
       }
     }
@@ -31,7 +31,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
     }
     case MOVE_ITEM_CONSTRUCTOR: {
       const ingredients = [...state.ingredients];
-      console.log(action);
       ingredients.splice(
         action.payload.toIndex,
         0,

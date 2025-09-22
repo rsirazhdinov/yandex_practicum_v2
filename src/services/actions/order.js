@@ -11,7 +11,6 @@ export const saveOrderAction = (ingredientsIdArr) => {
     });
     saveOrder(ingredientsIdArr)
       .then((res) => {
-        console.log(res);
         dispatch({
           type: SAVE_ORDER_SUCCESS,
           payload: res,

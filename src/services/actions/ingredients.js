@@ -13,7 +13,7 @@ export function getIngredients() {
       .then((res) => {
         dispatch({
           type: GET_INGREDIENTS_SUCCESS,
-          payload: res,
+          payload: res.data,
         });
       })
       .catch(() => {
