@@ -1,0 +1,9 @@
+.menu_item {
+  display: flex;
+  align-items: center;
+  border-radius: 40px;
+}
+
+.title {
+  white-space: nowrap;
+}

@@ -1,0 +1,15 @@
+.constructor_element_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 536px;
+  height: 80px;
+}
+
+.element_row_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: move;
+}

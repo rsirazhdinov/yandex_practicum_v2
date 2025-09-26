@@ -1,0 +1,24 @@
+.modal_popup {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 720px;
+  text-align: center;
+  background-color: #1c1c21;
+  border: 1px solid rgb(76 76 255 / 20%);
+  border-radius: 40px;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 640px;
+  min-height: 64px;
+}
+
+.close_icon {
+  cursor: pointer;
+}

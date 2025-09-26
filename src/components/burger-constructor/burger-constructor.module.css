@@ -1,7 +1,62 @@
-.burger_constructor {
+.btn {
+  height: 64px;
+}
+
+.btn_box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+}
+
+.count_box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 64px;
+}
+
+.count_icon {
+  width: 36px;
+  height: 36px;
+}
+
+.burger_constructor_box {
   display: flex;
   flex-direction: column;
-  width: 600px;
-  padding-bottom: 20px;
-  color: var(--text-primary-color);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden auto;
+  list-style: none;
+  scrollbar-color: #8585ad #2f2f37;
+  scrollbar-width: thin;
+}
+
+.bc_text_bread {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 536px;
+  height: 80px;
+}
+
+.bc_box_active {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 470px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden auto;
+  list-style: none;
+  scrollbar-color: #8585ad #2f2f37;
+  scrollbar-width: thin;
+}
+
+.constructor_section {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 0;
 }

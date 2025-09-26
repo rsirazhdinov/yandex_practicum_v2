@@ -1,21 +1,55 @@
-import { AppHeader } from '@components/app-header/app-header';
-import { BurgerConstructor } from '@components/burger-constructor/burger-constructor';
-import { BurgerIngredients } from '@components/burger-ingredients/burger-ingredients';
-import { ingredients } from '@utils/ingredients';
+import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './app.module.css';
+import { getIngredients } from '@services/actions/ingredients.js';
+import { DELETE_MODAL_DATA } from '@services/actions/modal.js';
+import { getItemsReducer } from '@services/reducers/ingredients.js';
 
-export const App = () => {
+import AppHeader from '../app-header/app-header';
+import BurgerConstructor from '../burger-constructor/burger.constructor';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import Modal from '../modal/modal';
+
+import appStyles from './app.module.css';
+
+function App() {
+  const modalData = useSelector((store) => store.modal.data);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getIngredients());
+  }, [getItemsReducer]);
+
+  const handleCloseModal = () => {
+    dispatch({
+      type: DELETE_MODAL_DATA,
+    });
+  };
+
   return (
-    <div className={styles.app}>
+    <div className={appStyles.app}>
       <AppHeader />
-      <h1 className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}>
-        Соберите бургер
-      </h1>
-      <main className={`${styles.main} pl-5 pr-5`}>
-        <BurgerIngredients ingredients={ingredients} />
-        <BurgerConstructor ingredients={ingredients} />
+      <main className={` mb-10 ${appStyles.main_screen}`}>
+        <DndProvider backend={HTML5Backend}>
+          <section className={appStyles.burger_ingredients}>
+            <BurgerIngredients />
+          </section>
+          <section className={`pt-25 ${appStyles.burger_constructor}`}>
+            <BurgerConstructor />
+          </section>
+        </DndProvider>
       </main>
+
+      {modalData && (
+        <Modal header="Детали ингредиента" onClose={handleCloseModal}>
+          <IngredientDetails />
+        </Modal>
+      )}
     </div>
   );
-};
+}
+
+export default App;

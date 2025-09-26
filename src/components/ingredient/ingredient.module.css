@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-basis: 272px;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.img {
+  flex: none;
+  width: 240px;
+  height: 120px;
+}
+
+.price {
+  display: flex;
+}
+
+.name {
+  height: 48px;
+  text-align: center;
+}
