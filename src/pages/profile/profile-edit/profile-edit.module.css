@@ -1,0 +1,4 @@
+.button_box {
+  display: flex;
+  align-self: flex-end;
+}

@@ -1,0 +1,48 @@
+.main {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.main_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+
+.section_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.p_wrapper {
+  display: flex;
+  align-items: center;
+  width: 320px;
+  min-height: 64px;
+}
+
+.p_last {
+  width: 320px;
+  min-height: 48px;
+  font-size: 16px;
+}
+
+.a {
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
