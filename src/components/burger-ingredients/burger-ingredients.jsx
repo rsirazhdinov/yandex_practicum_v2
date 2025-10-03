@@ -1,3 +1,4 @@
+import { Preloader } from '@krgaa/react-developer-burger-ui-components';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
@@ -74,7 +75,10 @@ export default function BurgerIngredients() {
         onScroll={handleScroll}
       >
         {ingredientsRequest && (
-          <p className="mb-15 text text_type_main-medium">Загрузка...</p>
+          <>
+            <p className="mb-15 text text_type_main-medium">Загрузка...</p>
+            <Preloader />
+          </>
         )}
         {ingredientsFailed && (
           <p className="mb-15 text text_type_main-medium">

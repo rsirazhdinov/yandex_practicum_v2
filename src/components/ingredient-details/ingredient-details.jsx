@@ -1,11 +1,15 @@
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { ingredientType } from '../../utils/burger-types';
 
 import ingredientDetailsStyles from './ingredient-details.module.css';
 
 export default function IngredientDetails() {
-  const ingredient = useSelector((store) => store?.modal?.data);
+  const { id } = useParams();
+  const ingredient = useSelector((store) =>
+    store?.ingredients?.ingredients.find((item) => item._id === id)
+  );
   return (
     <div className={ingredientDetailsStyles.modal_content}>
       <img
