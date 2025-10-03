@@ -22,7 +22,8 @@ export const Login = () => {
   const loginRequest = useSelector((store) => store.auth.loginRequest);
   const loginFailed = useSelector((store) => store.auth.loginFailed);
 
-  const handleButtonClick = () => {
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     dispatch(
       login({
         email,
@@ -34,7 +35,7 @@ export const Login = () => {
   return (
     <main className={styles.main}>
       <section className={styles.section_content}>
-        <section className={styles.section_inputs}>
+        <form className={styles.section_inputs} onSubmit={handleSubmitForm}>
           <p className=" mt-10 text text_type_main-medium">Вход</p>
           <EmailInput
             disabled={loginRequest}
@@ -56,10 +57,9 @@ export const Login = () => {
           />
           <Button
             disabled={!isEmailValid || !isPasswordValid || loginRequest}
-            htmlType="button"
             type="primary"
             size="medium"
-            onClick={handleButtonClick}
+            htmlType="submit"
           >
             Войти
           </Button>
@@ -70,7 +70,7 @@ export const Login = () => {
           )}
 
           {loginRequest && <Preloader />}
-        </section>
+        </form>
         <section className={styles.section_footer}>
           <p className={`text text_type_main-small text_color_inactive`}>
             Вы - новый пользователь? <Link to="/register">Зарегистрироваться</Link>

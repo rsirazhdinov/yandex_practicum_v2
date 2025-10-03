@@ -27,8 +27,8 @@ export const ProfileEdit = () => {
     setPassword('');
   };
 
-  const handleSave = () => {
-    console.log('handleSave');
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     dispatch(
       patchUser({
         name,
@@ -39,7 +39,7 @@ export const ProfileEdit = () => {
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmitForm} className={styles.form}>
       <Input
         disabled={patchUserRequest}
         type="text"
@@ -85,10 +85,9 @@ export const ProfileEdit = () => {
           </Button>
           <Button
             disabled={patchUserRequest}
-            htmlType="button"
+            htmlType="submit"
             type="primary"
             size="medium"
-            onClick={handleSave}
           >
             Сохранить
           </Button>
@@ -98,6 +97,6 @@ export const ProfileEdit = () => {
         <p className="text text_type_main-small text_color_error">Произошла ошибка...</p>
       )}
       {patchUserRequest && <Preloader />}
-    </>
+    </form>
   );
 };

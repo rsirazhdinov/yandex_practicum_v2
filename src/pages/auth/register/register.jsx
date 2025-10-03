@@ -22,7 +22,8 @@ export const Register = () => {
   const dispatch = useDispatch();
   const registerRequest = useSelector((store) => store.auth.registerRequest);
   const registerFailed = useSelector((store) => store.auth.registerFailed);
-  const handleButtonClick = () => {
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     dispatch(
       register({
         name,
@@ -35,7 +36,7 @@ export const Register = () => {
   return (
     <main className={styles.main}>
       <section className={styles.section_content}>
-        <section className={styles.section_inputs}>
+        <form className={styles.section_inputs} onSubmit={handleSubmitForm}>
           <p className=" mt-10 text text_type_main-medium">Регистрация</p>
           <Input
             disabled={registerRequest}
@@ -61,10 +62,9 @@ export const Register = () => {
           />
           <Button
             disabled={!name || !isEmailValid || !isPasswordValid || registerRequest}
-            htmlType="button"
+            htmlType="submit"
             type="primary"
             size="medium"
-            onClick={handleButtonClick}
           >
             Зарегистрироваться
           </Button>
@@ -75,7 +75,7 @@ export const Register = () => {
           )}
 
           {registerRequest && <Preloader />}
-        </section>
+        </form>
         <p className={`text text_type_main-small text_color_inactive`}>
           Уже зарегистрированы <a href="/">Войти</a>
         </p>

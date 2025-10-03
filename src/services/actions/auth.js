@@ -30,7 +30,6 @@ export function login(form) {
     apiAuth
       .login(form)
       .then((res) => {
-        console.log(res);
         dispatch({
           type: LOGIN_SUCCESS,
           payload: res.user,
@@ -45,9 +44,7 @@ export function login(form) {
 }
 
 export function logout() {
-  console.log('logout');
   return function (dispatch) {
-    console.log('logout disp');
     dispatch({
       type: LOGOUT_REQUEST,
     });
@@ -96,14 +93,12 @@ export function checkUserAuth() {
       apiAuth
         .getUser()
         .then((res) => {
-          console.log(res);
           dispatch({
             type: GET_USER_SUCCESS,
             payload: res.user,
           });
         })
-        .catch((e) => {
-          console.log(e);
+        .catch(() => {
           dispatch({
             type: GET_USER_FAILED,
           });

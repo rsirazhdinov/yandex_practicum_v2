@@ -20,7 +20,8 @@ export const ForgotPassword = () => {
       navigate('/reset-password');
     }
   }, []);
-  const handleClickButton = () => {
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     setIsLoading(true);
     setError('');
     passwordForgot({
@@ -36,7 +37,7 @@ export const ForgotPassword = () => {
   return (
     <main className={styles.main}>
       <section className={styles.section_content}>
-        <section className={styles.section_inputs}>
+        <form className={styles.section_inputs} onSubmit={handleSubmitForm}>
           <p className=" mt-10 text text_type_main-medium">Восстановление пароля</p>
           <EmailInput
             disabled={isLoading}
@@ -51,10 +52,9 @@ export const ForgotPassword = () => {
           />
           <Button
             disabled={!isEmailValid || isLoading}
-            htmlType="button"
+            htmlType="submit"
             type="primary"
             size="medium"
-            onClick={handleClickButton}
           >
             Восстановить
           </Button>
@@ -64,7 +64,7 @@ export const ForgotPassword = () => {
           )}
 
           {isLoading && <Preloader />}
-        </section>
+        </form>
         <p className={`text text_type_main-small text_color_inactive`}>
           Вспомнили пароль? <Link to="/login">Войти</Link>
         </p>
