@@ -1,0 +1,6 @@
+.main_screen {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 40px;
+}

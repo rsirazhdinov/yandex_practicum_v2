@@ -1,3 +1,14 @@
+.a {
+  position: relative;
+  display: flex;
+  flex-basis: 272px;
+  flex-flow: column wrap;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;

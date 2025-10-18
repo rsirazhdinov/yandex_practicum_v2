@@ -1,4 +1,4 @@
-import { saveOrder } from '@utils/burger-api.js';
+import { saveOrder } from '../../utils/api.js';
 
 export const SAVE_ORDER_REQUEST = 'SAVE_ORDER_REQUEST';
 export const SAVE_ORDER_SUCCESS = 'SAVE_ORDER_SUCCESS';

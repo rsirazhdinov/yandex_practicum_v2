@@ -1,3 +1,4 @@
+import { Preloader } from '@krgaa/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -14,7 +15,10 @@ export default function OrderDetails() {
   if (saveOrderRequest) {
     return (
       <div className={orderDetailsStyles.order_details_box}>
-        <p className="mb-15 text text_type_main-medium">Загрузка...</p>
+        <p className="mb-15 text text_type_main-medium">Оформление заказа...</p>
+        <div className="mb-30">
+          <Preloader />
+        </div>
       </div>
     );
   }

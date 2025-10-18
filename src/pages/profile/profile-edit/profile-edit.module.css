@@ -1,0 +1,12 @@
+.button_box {
+  display: flex;
+  align-self: flex-end;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}

@@ -18,6 +18,7 @@
   justify-content: center;
   align-items: center;
   height: 56px;
+  text-decoration: none !important;
   cursor: pointer;
 }
 
@@ -28,4 +29,8 @@
   height: 56px;
   margin-left: 289px;
   cursor: pointer;
+}
+
+.a {
+  text-decoration: none;
 }

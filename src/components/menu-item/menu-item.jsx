@@ -12,7 +12,7 @@ export default function MenuItem({ iconName, iconType, title, isActive }) {
     <div className={`p-5 mb-4 mt-4 ml-2 ${menuItemStyles.menu_item}`}>
       <span className={menuItemStyles.icon}>{getIconFromName(iconName, iconType)}</span>{' '}
       <p
-        className={`text ml-2 text_type_main-default ${isActive ? '' : 'text_color_inactive'} ${menuItemStyles.title}`}
+        className={`text ml-2 text_type_main-default ${isActive ? 'text_color_primary' : 'text_color_inactive'} ${menuItemStyles.title}`}
       >
         {title}
       </p>

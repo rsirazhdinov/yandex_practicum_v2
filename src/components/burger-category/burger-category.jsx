@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link, useLocation } from 'react-router-dom';
 
 import { ingredientTypeArray } from '../../utils/burger-types';
 import BurgerIngredient from '../ingredient/burger-ingredient';
@@ -6,6 +7,7 @@ import BurgerIngredient from '../ingredient/burger-ingredient';
 import styles from './burger-category.module.css';
 
 export default function BurgerCategory({ title, titleId, ingredients, ref }) {
+  const location = useLocation();
   return (
     <>
       <p ref={ref} id={titleId} className="text text_type_main-medium">
@@ -14,12 +16,14 @@ export default function BurgerCategory({ title, titleId, ingredients, ref }) {
       <div className={styles.container}>
         {ingredients &&
           ingredients.map((ingredient) => (
-            <BurgerIngredient
-              count={1}
-              className="ml-6"
+            <Link
+              className={styles.a}
               key={ingredient._id}
-              ingredient={ingredient}
-            />
+              to={`/ingredient/${ingredient._id}`}
+              state={{ backgroundLocation: location }}
+            >
+              <BurgerIngredient count={1} className="ml-6" ingredient={ingredient} />
+            </Link>
           ))}
       </div>
     </>
