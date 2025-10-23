@@ -1,12 +1,25 @@
-import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 
-import { ingredientTypeArray } from '../../utils/burger-types';
 import BurgerIngredient from '../ingredient/burger-ingredient';
+
+import type { TIngredient } from '@/utils/types';
+import type { RefObject } from 'react';
 
 import styles from './burger-category.module.css';
 
-export default function BurgerCategory({ title, titleId, ingredients, ref }) {
+type BurgerCategoryProps = {
+  title: string;
+  titleId: string;
+  ingredients: readonly TIngredient[];
+  ref: RefObject<HTMLParagraphElement | null>;
+};
+
+export default function BurgerCategory({
+  title,
+  titleId,
+  ingredients,
+  ref,
+}: BurgerCategoryProps): React.JSX.Element {
   const location = useLocation();
   return (
     <>
@@ -22,17 +35,10 @@ export default function BurgerCategory({ title, titleId, ingredients, ref }) {
               to={`/ingredient/${ingredient._id}`}
               state={{ backgroundLocation: location }}
             >
-              <BurgerIngredient count={1} className="ml-6" ingredient={ingredient} />
+              <BurgerIngredient className="ml-6" ingredient={ingredient} />
             </Link>
           ))}
       </div>
     </>
   );
 }
-
-BurgerCategory.propTypes = {
-  title: PropTypes.string.isRequired,
-  titleId: PropTypes.number.isRequired,
-  ingredients: ingredientTypeArray,
-  handleOpenModal: PropTypes.func.isRequired,
-};

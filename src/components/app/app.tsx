@@ -23,17 +23,19 @@ import AppHeader from '../app-header/app-header';
 
 import appStyles from './app.module.css';
 
-function App() {
+function App(): React.JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  let state = location.state;
+  const state = location.state;
 
   React.useEffect(() => {
+    //@ts-expect-error 'sprint-5'
     dispatch(checkUserAuth());
   }, []);
 
   React.useEffect(() => {
+    //@ts-expect-error 'sprint-5'
     dispatch(getIngredients());
   }, [getItemsReducer]);
 

@@ -9,27 +9,34 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { patchUser } from '@services/actions/auth.js';
 
+import type { FormEvent } from 'react';
+import type React from 'react';
+
 import styles from './profile-edit.module.css';
 
-export const ProfileEdit = () => {
+export const ProfileEdit = (): React.JSX.Element => {
+  //@ts-expect-error 'sprint-5'
   const user = useSelector((store) => store.auth.user);
   const dispatch = useDispatch();
-  const [name, setName] = useState(user.name || '');
-  const [email, setEmail] = useState(user.email || '');
-  const [password, setPassword] = useState('');
-
+  const [name, setName] = useState<string>(user.name || '');
+  const [email, setEmail] = useState<string>(user.email || '');
+  const [password, setPassword] = useState<string>('');
+  //@ts-expect-error 'sprint-5'
   const patchUserRequest = useSelector((store) => store.auth.patchUserRequest);
+  //@ts-expect-error 'sprint-5'
   const patchUserFailed = useSelector((store) => store.auth.patchUserFailed);
 
-  const resetForm = () => {
+  const resetForm = (): void => {
     setName(user.name);
     setEmail(user.email);
     setPassword('');
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+
     dispatch(
+      //@ts-expect-error 'sprint-5'
       patchUser({
         name,
         email,
@@ -50,6 +57,8 @@ export const ProfileEdit = () => {
         value={name}
         name={'Имя'}
         icon={'EditIcon'}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
       />
       <Input
         disabled={patchUserRequest}
@@ -59,8 +68,10 @@ export const ProfileEdit = () => {
         }}
         placeholder="Логин"
         value={email}
-        name={'Имя'}
+        name={'Логин'}
         icon={'EditIcon'}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
       />
       <PasswordInput
         disabled={patchUserRequest}

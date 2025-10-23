@@ -11,10 +11,25 @@ import {
   MOVE_ITEM_CONSTRUCTOR,
 } from '@services/actions/burger-constructor.js';
 
+import type { TIngredient } from '@/utils/types';
+import type { Identifier } from 'dnd-core';
+
 import styles from './draggable-ingredient.module.css';
 
-export const DraggableIngredient = ({ item, index }) => {
-  const [{ isDragging }, drag] = useDrag({
+type DraggableIngredientProps = {
+  item: TIngredient & { id: number };
+  index: number;
+};
+
+export const DraggableIngredient = ({
+  item,
+  index,
+}: DraggableIngredientProps): React.JSX.Element => {
+  type DragObject = {
+    id: number;
+    index: number;
+  };
+  const [{ isDragging }, drag] = useDrag<DragObject, unknown, { isDragging: boolean }>({
     type: 'sortIngred',
     item: () => {
       return { id: item.id, index };
@@ -24,14 +39,16 @@ export const DraggableIngredient = ({ item, index }) => {
     }),
   });
 
-  const ref = useRef(null);
-  const [{ handlerId }, drop] = useDrop({
+  const ref = useRef<HTMLLIElement | null>(null);
+  const [{ handlerId }, drop] = useDrop<
+    DragObject,
+    unknown,
+    { handlerId: Identifier | null }
+  >({
     accept: 'sortIngred',
-    collect(monitor) {
-      return {
-        handlerId: monitor.getHandlerId(),
-      };
-    },
+    collect: (monitor) => ({
+      handlerId: monitor.getHandlerId(),
+    }),
     hover(item, monitor) {
       if (!ref.current) {
         return;
@@ -49,6 +66,9 @@ export const DraggableIngredient = ({ item, index }) => {
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
       // Get pixels to the top
+      if (!clientOffset) {
+        return;
+      }
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
@@ -87,7 +107,7 @@ export const DraggableIngredient = ({ item, index }) => {
       style={{ opacity: opacity }}
       data-handler-id={handlerId}
     >
-      <DragIcon />
+      <DragIcon type="primary" />
       <div className={styles.constructor_element_box}>
         <ConstructorElement
           isLocked={false}

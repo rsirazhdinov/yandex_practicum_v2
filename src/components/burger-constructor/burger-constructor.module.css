@@ -60,3 +60,15 @@
   flex-direction: column;
   height: 0;
 }
+
+.constructor_element_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 536px;
+  height: 80px;
+}
+
+.on_hover {
+  background-color: #4caf50;
+}

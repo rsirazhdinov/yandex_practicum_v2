@@ -1,11 +1,11 @@
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Logo } from '@krgaa/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 
 import MenuItem from '../menu-item/menu-item';
 
 import styles from './app-header.module.css';
 
-export default function AppHeader() {
+export default function AppHeader(): React.JSX.Element {
   return (
     <header className={styles.menu}>
       <nav className={styles.menu_box}>

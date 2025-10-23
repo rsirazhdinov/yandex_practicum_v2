@@ -12,19 +12,23 @@ import { login } from '@services/actions/auth.js';
 
 import styles from '../auth.module.css';
 
-export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [password, setPassword] = useState('');
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
+export const Login = (): React.JSX.Element => {
+  const [email, setEmail] = useState<string>('');
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>('');
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
 
   const dispatch = useDispatch();
+  //@ts-expect-error 'sprint-5'
   const loginRequest = useSelector((store) => store.auth.loginRequest);
+  //@ts-expect-error 'sprint-5'
   const loginFailed = useSelector((store) => store.auth.loginFailed);
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+
     dispatch(
+      //@ts-expect-error 'sprint-5'
       login({
         email,
         password,

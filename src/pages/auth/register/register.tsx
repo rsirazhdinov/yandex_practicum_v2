@@ -12,19 +12,23 @@ import { register } from '@services/actions/auth.js';
 
 import styles from '../auth.module.css';
 
-export const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [password, setPassword] = useState('');
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
+export const Register = (): React.JSX.Element => {
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>('');
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
 
   const dispatch = useDispatch();
+  //@ts-expect-error 'sprint-5'
   const registerRequest = useSelector((store) => store.auth.registerRequest);
+  //@ts-expect-error 'sprint-5'
   const registerFailed = useSelector((store) => store.auth.registerFailed);
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+
     dispatch(
+      //@ts-expect-error 'sprint-5'
       register({
         name,
         email,
@@ -44,7 +48,9 @@ export const Register = () => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Имя"
             value={name}
-            name={'Имя'}
+            name={'name'}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           />
           <EmailInput
             disabled={registerRequest}

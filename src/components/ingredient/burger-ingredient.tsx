@@ -2,38 +2,52 @@ import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
+import { useRef } from 'react';
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ADD_MODAL_DATA } from '@services/actions/modal.js';
 import { getCount } from '@services/selectors/burger-constructor.js';
 
-import { ingredientType } from '../../utils/burger-types';
+import type { TIngredient } from '@/utils/types';
 
 import styles from './ingredient.module.css';
-export default function BurgerIngredient({ ingredient }) {
+export default function BurgerIngredient({
+  ingredient,
+}: {
+  ingredient: TIngredient;
+  className?: string;
+}): React.JSX.Element {
   const { image, price, name } = ingredient;
   const dispatch = useDispatch();
   const count = useSelector((store) => getCount(store, ingredient));
 
-  const [{ opacity }, ref] = useDrag({
+  const [{ opacity }, drag] = useDrag<TIngredient, unknown, { opacity: number }>({
     type: 'ingredients',
     item: { ...ingredient },
     collect: (monitor) => ({
-      opacity: monitor.isDragging ? 1 : 0.5,
+      opacity: monitor.isDragging() ? 0.5 : 1,
     }),
   });
-  const onClickHandle = (ingredient) => {
+  const onClickHandle = (ingredient: TIngredient): void => {
     dispatch({
       type: ADD_MODAL_DATA,
       payload: ingredient,
     });
   };
 
+  const ref = useRef<HTMLDivElement>(null); // If you also need a separate ref
+
+  const combinedRef = (node: HTMLDivElement | null): void => {
+    drag(node); // Pass the node to react-dnd's drag connector
+    if (ref.current) {
+      ref.current = node; // Assign the node to your own ref if needed
+    }
+  };
+
   return (
     <article
-      ref={ref}
+      ref={combinedRef}
       style={{ opacity }}
       className={styles.container}
       onClick={() => onClickHandle(ingredient)}
@@ -54,9 +68,3 @@ export default function BurgerIngredient({ ingredient }) {
     </article>
   );
 }
-
-BurgerIngredient.propTypes = {
-  ingredient: ingredientType,
-  count: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
