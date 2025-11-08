@@ -1,15 +1,17 @@
 import { Preloader } from '@krgaa/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import done_img from '../../images/done.png';
 
 import orderDetailsStyles from './order-details.module.css';
 
-export default function OrderDetails() {
+export default function OrderDetails(): React.JSX.Element {
   const { order, saveOrderRequest, saveOrderFailed } = useSelector((store) => ({
+    //@ts-expect-error 'sprint-5'
     order: store?.order?.saveOrderData?.order?.number,
+    //@ts-expect-error 'sprint-5'
     saveOrderRequest: store?.order?.saveOrderRequest,
+    //@ts-expect-error 'sprint-5'
     saveOrderFailed: store?.order?.saveOrderFailed,
   }));
   if (saveOrderRequest) {
@@ -45,7 +47,3 @@ export default function OrderDetails() {
     </div>
   );
 }
-
-OrderDetails.propTyeps = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-};

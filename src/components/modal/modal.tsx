@@ -1,32 +1,37 @@
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 
-import IngredientDetails from '@components/ingredient-details/ingredient-details.jsx';
-import ModalOverlay from '@components/modal-overlay/modal-overlay.jsx';
+import ModalOverlay from '../modal-overlay/modal-overlay';
 
-import modalStyles from '@components/modal/modal.module.css';
+import modalStyles from './modal.module.css';
 
-export const ModalIngredient = () => {
-  const header = 'Детали ингредиента';
-  const navigate = useNavigate();
+const ModalRoot = document.getElementById('react-modals') as HTMLElement;
 
-  const onClose = () => {
-    navigate(-1);
-  };
+type ModalProps = {
+  header?: string;
+  onClose: () => void;
+  children: React.JSX.Element;
+};
+
+export default function Modal({
+  header,
+  onClose,
+  children,
+}: ModalProps): React.JSX.Element {
   React.useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') {
         onClose();
       }
     };
     document.addEventListener('keydown', handleEsc);
-    return () => {
+    return (): void => {
       document.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);
 
-  return (
+  return createPortal(
     <ModalOverlay onClick={onClose}>
       <div className={` ${modalStyles.modal_popup}`}>
         <div className={` pl-10 pt-10 pr-10 ${modalStyles.modal_header}`}>
@@ -37,10 +42,9 @@ export const ModalIngredient = () => {
             onClick={onClose}
           />
         </div>
-        <div>
-          <IngredientDetails />
-        </div>
+        <div>{children}</div>
       </div>
-    </ModalOverlay>
+    </ModalOverlay>,
+    ModalRoot
   );
-};
+}

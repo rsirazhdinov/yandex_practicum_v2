@@ -1,27 +1,33 @@
 import { Preloader } from '@krgaa/react-developer-burger-ui-components';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ingredientTypeArray } from '../../utils/burger-types';
 import BurgerCategory from '../burger-category/burger-category';
+
+import type { TIngredient } from '@/utils/types';
 
 import styles from './burger-ingredients.module.css';
 
-export default function BurgerIngredients() {
-  const [current, setCurrent] = React.useState('bun');
-  const ingredients = useSelector((store) => store?.ingredients?.ingredients);
+export default function BurgerIngredients(): React.JSX.Element {
+  const [current, setCurrent] = React.useState<string>('bun');
+
+  const ingredients: readonly TIngredient[] = useSelector(
+    //@ts-expect-error 'sprint-5'
+    (store) => store?.ingredients?.ingredients
+  );
 
   const ingredientsRequest = useSelector(
+    //@ts-expect-error 'sprint-5'
     (store) => store.ingredients.ingredientsRequest
   );
+  //@ts-expect-error 'sprint-5'
   const ingredientsFailed = useSelector((store) => store.ingredients.ingredientsFailed);
 
-  const refNav = useRef(null);
-  const refBun = useRef(null);
-  const refSauce = useRef(null);
-  const refMain = useRef(null);
+  const refNav = useRef<HTMLElement | null>(null);
+  const refBun = useRef<HTMLParagraphElement | null>(null);
+  const refSauce = useRef<HTMLParagraphElement | null>(null);
+  const refMain = useRef<HTMLParagraphElement | null>(null);
 
   const bun = ingredients?.filter((item) => item.type === 'bun');
   const sauce = ingredients?.filter((item) => item.type === 'sauce');
@@ -33,11 +39,14 @@ export default function BurgerIngredients() {
     }
   }, [current]);
 
-  const handleScroll = () => {
-    const { bottom } = refNav.current.getBoundingClientRect();
-    const { top: topBun } = refBun.current.getBoundingClientRect();
-    const { top: topSauce } = refSauce.current.getBoundingClientRect();
-    const { top: topMain } = refMain.current.getBoundingClientRect();
+  const handleScroll = (): void => {
+    const bottom = refNav.current?.getBoundingClientRect()?.bottom;
+    const topBun = refBun.current?.getBoundingClientRect()?.top;
+    const topSauce = refSauce.current?.getBoundingClientRect()?.top;
+    const topMain = refMain.current?.getBoundingClientRect()?.top;
+    if (!bottom || !topBun || !topSauce || !topMain) {
+      return;
+    }
     const distanceBun = Math.abs(bottom - topBun);
     const distanceSauce = Math.abs(bottom - topSauce);
     const distanceMain = Math.abs(bottom - topMain);
@@ -114,8 +123,3 @@ export default function BurgerIngredients() {
     </section>
   );
 }
-
-BurgerIngredients.propTypes = {
-  ingredients: ingredientTypeArray,
-  handleOpenModal: PropTypes.func.isRequired,
-};

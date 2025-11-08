@@ -11,12 +11,12 @@ import { passwordReset } from '@utils/api.js';
 
 import styles from '@pages/auth/auth.module.css';
 
-export const ResetPassword = () => {
-  const [password, setPassword] = useState('');
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [token, setToken] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+export const ResetPassword = (): React.JSX.Element => {
+  const [password, setPassword] = useState<string>('');
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
+  const [token, setToken] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export const ResetPassword = () => {
       navigate('/forgot-password');
     }
   }, []);
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
@@ -64,6 +64,8 @@ export const ResetPassword = () => {
             placeholder="Введите код из письма"
             value={token}
             name={'token'}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           />
           <Button
             disabled={!isPasswordValid || !token || isLoading}

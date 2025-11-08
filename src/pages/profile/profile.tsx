@@ -6,13 +6,16 @@ import { logout } from '@services/actions/auth.js';
 
 import styles from './profile.module.css';
 
-export const Profile = () => {
+export const Profile = (): React.JSX.Element => {
   const dispatch = useDispatch();
+  //@ts-expect-error 'sprint-5'
   const logoutRequest = useSelector((store) => store.auth.logoutRequest);
+  //@ts-expect-error 'sprint-5'
   const logoutFailed = useSelector((store) => store.auth.logoutFailed);
 
   const match = useMatch('/profile/orders');
-  const handleExit = () => {
+  const handleExit = (): void => {
+    //@ts-expect-error 'sprint-5'
     dispatch(logout());
   };
   return (

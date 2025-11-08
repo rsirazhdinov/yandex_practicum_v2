@@ -7,11 +7,11 @@ import { passwordForgot } from '@utils/api.js';
 
 import styles from '@pages/auth/auth.module.css';
 
-export const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+export const ForgotPassword = (): React.JSX.Element => {
+  const [email, setEmail] = useState<string>('');
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export const ForgotPassword = () => {
       navigate('/reset-password');
     }
   }, []);
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
@@ -28,10 +28,11 @@ export const ForgotPassword = () => {
       email,
     })
       .then(() => {
+        //@ts-expect-error 'sprint-5'
         localStorage.setItem('resetPassword', true);
         navigate('/reset-password');
       })
-      .catch((e) => setError(e))
+      .catch((e: string) => setError(e))
       .finally(() => setIsLoading(false));
   };
   return (

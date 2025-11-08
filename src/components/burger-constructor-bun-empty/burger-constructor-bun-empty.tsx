@@ -1,6 +1,12 @@
 import styles from './burger-constructor-bun-empty.module.css';
 
-export const BurgerConstructorBunEmpty = ({ topOrBoottom }) => {
+type BurgerConstructorBunEmptyProps = {
+  topOrBoottom: string;
+};
+
+export const BurgerConstructorBunEmpty = ({
+  topOrBoottom,
+}: BurgerConstructorBunEmptyProps): React.JSX.Element => {
   const addClass = topOrBoottom === 'top' ? styles.top : styles.bottom;
   return (
     <div className={` ${styles.main} ${addClass}`}>

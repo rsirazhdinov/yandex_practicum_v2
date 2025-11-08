@@ -3,7 +3,7 @@ import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -19,18 +19,31 @@ import { ingredientTypeArray } from '../../utils/burger-types';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
+import type { TIngredient } from '@/utils/types';
+
 import styles from './burger-constructor.module.css';
 
-export default function BurgerConstructor() {
-  const [orderDetailsModalVisible, setOrderDetailsModalVisible] = useState(false);
+type TIngredietWithId = { id: number } & TIngredient;
+export default function BurgerConstructor(): React.JSX.Element {
+  const [orderDetailsModalVisible, setOrderDetailsModalVisible] =
+    useState<boolean>(false);
+  //@ts-expect-error 'sprint-5'
   const user = useSelector((store) => store?.auth?.user);
-  const ingredients = useSelector((store) => store?.burgerConstructor?.ingredients);
+  const ingredients: readonly TIngredietWithId[] = useSelector(
+    //@ts-expect-error 'sprint-5'
+    (store) => store?.burgerConstructor?.ingredients
+  );
+  //@ts-expect-error 'sprint-5'
   const bun = useSelector((store) => store?.burgerConstructor?.bun);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const totalPrice = useSelector(getTotalPrice);
 
-  const [{ isHover }, dropTarger] = useDrop({
+  const [{ isHover }, dropTarger] = useDrop<
+    TIngredietWithId,
+    unknown,
+    { isHover: boolean }
+  >({
     accept: 'ingredients',
     drop(item) {
       dispatch(addItemConstructor(item));
@@ -40,7 +53,7 @@ export default function BurgerConstructor() {
     }),
   });
 
-  const handleOpenOrderDetailsModal = () => {
+  const handleOpenOrderDetailsModal = (): void => {
     if (!user) {
       navigate('/login');
       return;
@@ -51,10 +64,11 @@ export default function BurgerConstructor() {
       ...(ingredients?.map((item) => item._id) ?? []),
       bun?._id,
     ];
+    //@ts-expect-error 'sprint-5'
     dispatch(saveOrderAction(ingredientsIdArray));
   };
 
-  const handleCloseOrderDetailsModal = () => {
+  const handleCloseOrderDetailsModal = (): void => {
     setOrderDetailsModalVisible(false);
   };
 
@@ -62,10 +76,19 @@ export default function BurgerConstructor() {
     (item) => item.type !== 'bun'
   );
 
+  const ref = useRef<HTMLDivElement>(null); // If you also need a separate ref
+
+  const combinedRef = (node: HTMLDivElement | null): void => {
+    dropTarger(node); // Pass the node to react-dnd's drag connector
+    if (ref.current) {
+      ref.current = node; // Assign the node to your own ref if needed
+    }
+  };
+
   return (
     <section
-      ref={dropTarger}
-      className={` ${styles.constructor_section} ${isHover ? styles.onHover : ''} `}
+      ref={combinedRef}
+      className={` ${styles.constructor_section} ${isHover ? styles.on_hover : ''} `}
     >
       {!bun && (
         <div className={` mt-4 ml-10 ${styles.constructor_element_box}`}>
