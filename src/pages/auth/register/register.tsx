@@ -6,9 +6,10 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { register } from '@services/actions/auth.js';
+
+import { useDispatch, useSelector } from '../../../services/hooks';
 
 import styles from '../auth.module.css';
 
@@ -20,15 +21,14 @@ export const Register = (): React.JSX.Element => {
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  //@ts-expect-error 'sprint-5'
+
   const registerRequest = useSelector((store) => store.auth.registerRequest);
-  //@ts-expect-error 'sprint-5'
+
   const registerFailed = useSelector((store) => store.auth.registerFailed);
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     dispatch(
-      //@ts-expect-error 'sprint-5'
       register({
         name,
         email,

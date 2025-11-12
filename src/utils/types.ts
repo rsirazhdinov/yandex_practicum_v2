@@ -36,8 +36,28 @@ export type TLogin = {
   user: TUser;
 };
 
+export type TOwner = {
+  createdAt: string;
+  email: string;
+  name: string;
+  updatedAt: string;
+};
+
+export type TOrder = {
+  createdAt: string;
+  ingredients: TIngredient[];
+  name: string;
+  number: number;
+  owner: TOwner;
+  price: number;
+  status: string;
+  updatedAt: string;
+  _id: string;
+};
+
 export type TSaveOrder = {
-  orderId: number;
+  name: string;
+  order: TOrder;
   success: boolean;
 };
 

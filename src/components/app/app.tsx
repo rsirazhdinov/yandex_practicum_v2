@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { ProtectedRoute } from '@components/protected-route/protected-route.jsx';
@@ -19,6 +18,7 @@ import { checkUserAuth } from '@services/actions/auth.js';
 import { getIngredients } from '@services/actions/ingredients.js';
 import { getItemsReducer } from '@services/reducers/ingredients.js';
 
+import { useDispatch } from '../../services/hooks';
 import AppHeader from '../app-header/app-header';
 
 import appStyles from './app.module.css';
@@ -30,12 +30,10 @@ function App(): React.JSX.Element {
   const state = location.state;
 
   React.useEffect(() => {
-    //@ts-expect-error 'sprint-5'
     dispatch(checkUserAuth());
   }, []);
 
   React.useEffect(() => {
-    //@ts-expect-error 'sprint-5'
     dispatch(getIngredients());
   }, [getItemsReducer]);
 

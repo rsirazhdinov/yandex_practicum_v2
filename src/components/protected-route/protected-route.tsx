@@ -1,9 +1,10 @@
 import { Preloader } from '@krgaa/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
+import { useSelector } from '../../services/hooks';
+
 type ProtectedRouteProps = {
-  onlyUnAuth: boolean;
+  onlyUnAuth?: boolean;
   component: React.JSX.Element;
 };
 
@@ -11,9 +12,8 @@ export const ProtectedRoute = ({
   onlyUnAuth = false,
   component,
 }: ProtectedRouteProps): React.JSX.Element => {
-  //@ts-expect-error 'sprint-5'
   const user = useSelector((store) => store.auth.user);
-  //@ts-expect-error 'sprint-5'
+
   const isAuthChecked = useSelector((store) => store.auth.isAuthChecked);
   const location = useLocation();
 

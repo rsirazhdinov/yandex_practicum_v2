@@ -2,13 +2,28 @@ import {
   ADD_ITEM_CONSTRUCTOR,
   DELETE_ITEM_CONSTRUCTOR,
   MOVE_ITEM_CONSTRUCTOR,
-} from '@services/actions/burger-constructor.js';
+} from '@services/constants/burger-constructor';
 
-const initialState = {
+import type { TIngredient } from '@/utils/types';
+
+import type { TBurgerConsctructorActions } from '../actions/burger-constructor';
+
+type TIngredientWithId = TIngredient & { id: number };
+
+type TBurgerConstructorState = {
+  bun: TIngredient | null;
+  ingredients: TIngredientWithId[];
+};
+
+const initialState: TBurgerConstructorState = {
   bun: null,
   ingredients: [],
 };
-export const burgerConstructorReducer = (state = initialState, action) => {
+
+export const burgerConstructorReducer = (
+  state = initialState,
+  action: TBurgerConsctructorActions
+): TBurgerConstructorState => {
   switch (action.type) {
     case ADD_ITEM_CONSTRUCTOR: {
       if (action.payload.type === 'bun') {

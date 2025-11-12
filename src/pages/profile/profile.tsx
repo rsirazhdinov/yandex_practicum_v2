@@ -1,21 +1,21 @@
 import { Preloader } from '@krgaa/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Outlet, useMatch } from 'react-router-dom';
 
 import { logout } from '@services/actions/auth.js';
+
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import styles from './profile.module.css';
 
 export const Profile = (): React.JSX.Element => {
   const dispatch = useDispatch();
-  //@ts-expect-error 'sprint-5'
+
   const logoutRequest = useSelector((store) => store.auth.logoutRequest);
-  //@ts-expect-error 'sprint-5'
+
   const logoutFailed = useSelector((store) => store.auth.logoutFailed);
 
   const match = useMatch('/profile/orders');
   const handleExit = (): void => {
-    //@ts-expect-error 'sprint-5'
     dispatch(logout());
   };
   return (

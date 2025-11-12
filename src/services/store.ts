@@ -1,4 +1,4 @@
-import { compose, createStore, applyMiddleware } from 'redux';
+// import { compose, createStore, applyMiddleware } from 'redux';
 // import {getItemsReducer} from "@services/reducers/ingredients.js";
 // // import { composeWithDevTools } from 'redux-devtools-extension';
 // import { createStore, applyMiddleware } from 'redux';
@@ -50,23 +50,42 @@ import { compose, createStore, applyMiddleware } from 'redux';
 //       return state;
 //   }
 // }
-import { thunk } from 'redux-thunk';
+// import { thunk } from 'redux-thunk';
+
+import { configureStore } from '@reduxjs/toolkit';
 
 // const store = createStore(getItemsReducer);
 import { rootReducer } from './reducers';
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+// import { getItemsReducer } from './reducers/ingredients';
+// import { modalReducer } from './reducers/modal';
+// import { burgerConstructorReducer } from './reducers/burger-constructor';
+// import { saveOrderReducer } from './reducers/order';
+// import { authReducer } from './reducers/auth';
+// const composeEnhancers =
+//   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+//     : compose;
 
-// const store = configureStore({
-//   reducer: getItemsReducer
-// });
-const enhancer = composeEnhancers(applyMiddleware(thunk));
-// const enhancer = applyMiddleware(thunk);
-// const store = createStore(getItemsReducer, enhancer );
-const store = createStore(rootReducer, enhancer);
-//   reducer: getItemsReducer
+// const enhancer = composeEnhancers(applyMiddleware(thunk));
+// const store = createStore(rootReducer, enhancer);
+
+// export const store = configureStore(
+//   reducer: {
+//       ingredients: getItemsReducer,
+//       modal: modalReducer,
+//       burgerConstructor: burgerConstructorReducer,
+//       order: saveOrderReducer,
+//       auth: authReducer
+//   })
+
+//    export const store = configureStore({
+//   reducer: {
+//     ingredients: getItemsReducer,
+//   }
 // });
 
-export default store;
+export const store = configureStore({
+  reducer: rootReducer,
+});
+
+//export default store;

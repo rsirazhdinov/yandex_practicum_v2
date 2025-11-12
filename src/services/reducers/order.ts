@@ -2,14 +2,27 @@ import {
   SAVE_ORDER_FAILED,
   SAVE_ORDER_REQUEST,
   SAVE_ORDER_SUCCESS,
-} from '@services/actions/order.js';
+} from '../constants/order';
 
-const initialState = {
+import type { TSaveOrder } from '@/utils/types';
+
+import type { TOrdersActions } from '../actions/order';
+
+type TOrderState = {
+  saveOrderData: TSaveOrder | null;
+  saveOrderRequest: boolean;
+  saveOrderFailed: boolean;
+};
+
+const initialState: TOrderState = {
   saveOrderData: null,
   saveOrderRequest: false,
   saveOrderFailed: false,
 };
-export const saveOrderReducer = (state = initialState, action) => {
+export const saveOrderReducer = (
+  state = initialState,
+  action: TOrdersActions
+): TOrderState => {
   switch (action.type) {
     case SAVE_ORDER_REQUEST: {
       return {

@@ -1,13 +1,14 @@
+import { ADD_MODAL_DATA } from '@/services/constants/modal.js';
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useRef } from 'react';
 import { useDrag } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { ADD_MODAL_DATA } from '@services/actions/modal.js';
 import { getCount } from '@services/selectors/burger-constructor.js';
+
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import type { TIngredient } from '@/utils/types';
 

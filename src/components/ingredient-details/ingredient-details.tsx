@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import { useSelector } from '../../services/hooks';
 
 import ingredientDetailsStyles from './ingredient-details.module.css';
 
@@ -7,7 +8,6 @@ export default function IngredientDetails(): React.JSX.Element {
   const { id } = useParams();
 
   const ingredient = useSelector((store) =>
-    //@ts-expect-error 'sprint-5'
     store?.ingredients?.ingredients.find((item) => item._id === id)
   );
   return (

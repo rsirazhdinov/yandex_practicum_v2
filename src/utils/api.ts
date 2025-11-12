@@ -78,7 +78,9 @@ export const request = <T>(endpoint: string, options?: RequestInit): Promise<T> 
 export const fetchIngredients = (): Promise<TIngredients> =>
   request<TIngredients>('ingredients');
 
-export const saveOrder = (ingredientsIdArr: string[]): Promise<TSaveOrder> =>
+export const saveOrder = (
+  ingredientsIdArr: (string | undefined)[]
+): Promise<TSaveOrder> =>
   fetchWithRefresh<TSaveOrder>('orders', {
     method: 'POST',
     headers: {
@@ -108,7 +110,7 @@ const refreshToken = async (): Promise<TAuthToken> => {
 };
 
 type TFormLogin = {
-  name: string;
+  email: string;
   password: string;
 };
 
