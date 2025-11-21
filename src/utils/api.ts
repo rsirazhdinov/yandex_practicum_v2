@@ -1,5 +1,6 @@
 import type {
   TAuthToken,
+  TGetOrder,
   TGetUser,
   TIngredients,
   TLogin,
@@ -93,8 +94,11 @@ export const saveOrder = (
     }),
   });
 
-const refreshToken = async (): Promise<TAuthToken> => {
-  const response = await request<TAuthToken>('/auth/token', {
+export const getOrder = (orderId: number): Promise<TGetOrder> =>
+  request<TGetOrder>(`orders/${orderId}`);
+
+export const refreshToken = async (): Promise<TAuthToken> => {
+  const response = await request<TAuthToken>('auth/token', {
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain, */*',

@@ -7,7 +7,7 @@ import {
 
 import type { TIngredient } from '@/utils/types';
 
-import type { AppDispatchCustom, AppThunk } from '../types';
+import type { AppDispatchCustom, AppThunk } from '../store';
 
 export type IGetIngredientsRequestAction = {
   readonly type: typeof GET_INGREDIENTS_REQUEST;

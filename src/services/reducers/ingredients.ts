@@ -10,12 +10,14 @@ import type { TIngredientsActions } from '../actions/ingredients';
 
 type TIngredientsState = {
   ingredients: TIngredient[];
+  ingredientsHash: Record<string, TIngredient> | null;
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
 };
 
 const initialState: TIngredientsState = {
   ingredients: [],
+  ingredientsHash: {},
   ingredientsRequest: false,
   ingredientsFailed: false,
 };
@@ -34,6 +36,13 @@ export const getItemsReducer = (
       return {
         ...state,
         ingredients: action.payload,
+        ingredientsHash: action.payload.reduce(
+          (accumulator, currentObject: TIngredient) => {
+            accumulator[currentObject._id] = currentObject;
+            return accumulator;
+          },
+          {}
+        ),
         ingredientsRequest: false,
       };
     }

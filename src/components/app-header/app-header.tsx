@@ -23,7 +23,7 @@ export default function AppHeader(): React.JSX.Element {
           }}
         </NavLink>
 
-        <NavLink to="/order-feed" className={styles.a}>
+        <NavLink to="/feed" className={styles.a}>
           {({ isActive }) => {
             return (
               <MenuItem

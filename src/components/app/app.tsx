@@ -1,3 +1,4 @@
+import { ModalFeed } from '@/pages/modal-feed/modal-feed';
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ import { getItemsReducer } from '@services/reducers/ingredients.js';
 
 import { useDispatch } from '../../services/hooks';
 import AppHeader from '../app-header/app-header';
+import { BurgerOrderDetail } from '../burger-order-detail/burger-order-detail';
 
 import appStyles from './app.module.css';
 
@@ -65,18 +67,23 @@ function App(): React.JSX.Element {
           element={<ProtectedRoute onlyUnAuth component={<ResetPassword />} />}
         />
         <Route path="/ingredient/:id" element={<Ingredient />} />
+        <Route path="/feed/:number" element={<BurgerOrderDetail />} />
+
         <Route path="*" element={<NotFound404 />} />
 
         <Route path="/profile" element={<ProtectedRoute component={<Profile />} />}>
           <Route index element={<ProtectedRoute component={<ProfileEdit />} />} />
           <Route path="orders" element={<ProtectedRoute component={<Orders />} />} />
         </Route>
-        <Route path="/order-feed" element={<OrderFeed />} />
+        <Route path="/profile/orders/:number" element={<BurgerOrderDetail />} />
+        <Route path="/feed" element={<OrderFeed />} />
       </Routes>
 
       {state?.backgroundLocation && (
         <Routes>
           <Route path="/ingredient/:id" element={<ModalIngredient />} />
+          <Route path="/feed/:number" element={<ModalFeed />} />
+          <Route path="/profile/orders/:number" element={<ModalFeed />} />
         </Routes>
       )}
 

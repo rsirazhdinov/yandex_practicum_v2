@@ -55,6 +55,11 @@ export type TOrder = {
   _id: string;
 };
 
+export type TGetOrder = {
+  success: boolean;
+  orders: TOrder[];
+};
+
 export type TSaveOrder = {
   name: string;
   order: TOrder;
@@ -70,3 +75,9 @@ export type TLogut = {
   success: boolean;
   message: string;
 };
+
+export enum OrderStatus {
+  done = 'Выполнен',
+  created = 'Создан',
+  pending = 'Готовится',
+}

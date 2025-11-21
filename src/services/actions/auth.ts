@@ -21,7 +21,7 @@ import {
 
 import type { TUser } from '@/utils/types';
 
-import type { AppDispatchCustom, AppThunk } from '../types';
+import type { AppDispatchCustom, AppThunk } from '../store';
 
 export type IGetUserRequest = {
   readonly type: typeof GET_USER_REQUEST;
