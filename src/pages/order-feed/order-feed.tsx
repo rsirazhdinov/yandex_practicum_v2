@@ -6,9 +6,13 @@ import { useEffect } from 'react';
 import styles from './order-feed.module.css';
 export const OrderFeed = (): React.JSX.Element => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(connectFeed('wss://norma.education-services.ru/orders/all'));
-  }, [dispatch(disconnectFeed())]);
+    return (): void => {
+      dispatch(disconnectFeed());
+    };
+  }, []);
 
   const orders = useSelector((state) => state.feed.orders);
   const total = useSelector((state) => state.feed.total);

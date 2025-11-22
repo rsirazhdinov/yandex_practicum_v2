@@ -19,13 +19,16 @@ export const OrderCard = ({ orderData }: TOrderCard): React.JSX.Element => {
 
   const ingredientsHash = useSelector((state) => state.ingredients.ingredientsHash);
 
-  const totalPrice = orderData?.ingredients.reduce(
-    (accumulator, currentValue) =>
-      accumulator +
-      ingredientsHash?.[currentValue]['price'] *
-        (ingredientsHash?.[currentValue]['type'] === 'bun' ? 2 : 1),
-    0
-  );
+  let totalPrice = 0;
+  if (ingredientsHash) {
+    totalPrice = orderData?.ingredients.reduce(
+      (accumulator, currentValue) =>
+        accumulator +
+        ingredientsHash?.[currentValue]?.['price'] *
+          (ingredientsHash?.[currentValue]['type'] === 'bun' ? 2 : 1),
+      0
+    );
+  }
 
   return (
     <main className={appStyles.mainContainer}>

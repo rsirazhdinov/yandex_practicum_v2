@@ -15,7 +15,10 @@ export const Orders = (): React.JSX.Element => {
     dispatch(
       connectFeedProfile(`wss://norma.education-services.ru/orders?token=${token}`)
     );
-  }, [dispatch(disconnectFeedProfile())]);
+    return (): void => {
+      dispatch(disconnectFeedProfile());
+    };
+  }, []);
 
   const orders = useSelector((state) => state.feedProfile.orders);
 

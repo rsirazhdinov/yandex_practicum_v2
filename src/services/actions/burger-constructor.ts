@@ -5,6 +5,7 @@ import type { TIngredient } from '@/utils/types';
 import type {
   DELETE_ITEM_CONSTRUCTOR,
   MOVE_ITEM_CONSTRUCTOR,
+  RESET_ITEM_CONSTRUCTOR,
 } from '../constants/burger-constructor';
 
 function getRandomInt(min: number, max: number): number {
@@ -23,6 +24,10 @@ export type IDeleteItemConstructorAction = {
   readonly payload: number;
 };
 
+export type IResetItemConstructorAction = {
+  readonly type: typeof RESET_ITEM_CONSTRUCTOR;
+};
+
 export type IMoveItemConstructorAction = {
   readonly type: typeof MOVE_ITEM_CONSTRUCTOR;
   readonly payload: {
@@ -34,6 +39,7 @@ export type IMoveItemConstructorAction = {
 export type TBurgerConsctructorActions =
   | IAddItemConstructorAction
   | IDeleteItemConstructorAction
+  | IResetItemConstructorAction
   | IMoveItemConstructorAction;
 
 export const addItemConstructor = (item: TIngredient): IAddItemConstructorAction => ({

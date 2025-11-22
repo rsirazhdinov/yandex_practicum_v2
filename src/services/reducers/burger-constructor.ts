@@ -2,6 +2,7 @@ import {
   ADD_ITEM_CONSTRUCTOR,
   DELETE_ITEM_CONSTRUCTOR,
   MOVE_ITEM_CONSTRUCTOR,
+  RESET_ITEM_CONSTRUCTOR,
 } from '@services/constants/burger-constructor';
 
 import type { TIngredient } from '@/utils/types';
@@ -42,6 +43,13 @@ export const burgerConstructorReducer = (
       return {
         ...state,
         ingredients: state.ingredients.filter((item) => item.id !== action.payload),
+      };
+    }
+    case RESET_ITEM_CONSTRUCTOR: {
+      return {
+        ...state,
+        ingredients: initialState.ingredients,
+        bun: initialState.bun,
       };
     }
     case MOVE_ITEM_CONSTRUCTOR: {

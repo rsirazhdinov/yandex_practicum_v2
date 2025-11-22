@@ -1,4 +1,5 @@
 import { saveOrder, getOrder } from '../../utils/api.js';
+import { RESET_ITEM_CONSTRUCTOR } from '../constants/burger-constructor.js';
 import {
   SAVE_ORDER_REQUEST,
   SAVE_ORDER_SUCCESS,
@@ -57,6 +58,9 @@ export const saveOrderAction = (ingredientsIdArr: (string | undefined)[]): AppTh
         dispatch({
           type: SAVE_ORDER_SUCCESS,
           payload: res,
+        });
+        dispatch({
+          type: RESET_ITEM_CONSTRUCTOR,
         });
       })
       .catch((e) => {

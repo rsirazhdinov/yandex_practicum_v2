@@ -39,12 +39,6 @@ function App(): React.JSX.Element {
     dispatch(getIngredients());
   }, [getItemsReducer]);
 
-  // const handleCloseModal = () => {
-  //   dispatch({
-  //     type: DELETE_MODAL_DATA,
-  //   });
-  // };
-
   return (
     <div className={appStyles.app}>
       <AppHeader />
@@ -67,16 +61,20 @@ function App(): React.JSX.Element {
           element={<ProtectedRoute onlyUnAuth component={<ResetPassword />} />}
         />
         <Route path="/ingredient/:id" element={<Ingredient />} />
-        <Route path="/feed/:number" element={<BurgerOrderDetail />} />
 
-        <Route path="*" element={<NotFound404 />} />
+        <Route path="/feed" element={<OrderFeed />} />
+        <Route path="/feed/:number" element={<BurgerOrderDetail />} />
 
         <Route path="/profile" element={<ProtectedRoute component={<Profile />} />}>
           <Route index element={<ProtectedRoute component={<ProfileEdit />} />} />
           <Route path="orders" element={<ProtectedRoute component={<Orders />} />} />
         </Route>
-        <Route path="/profile/orders/:number" element={<BurgerOrderDetail />} />
-        <Route path="/feed" element={<OrderFeed />} />
+        <Route
+          path="/profile/orders/:number"
+          element={<ProtectedRoute component={<BurgerOrderDetail />} />}
+        />
+
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
 
       {state?.backgroundLocation && (

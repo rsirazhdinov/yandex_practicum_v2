@@ -37,7 +37,9 @@ export default function AppHeader(): React.JSX.Element {
           }}
         </NavLink>
       </nav>
-      <Logo />
+      <NavLink to={'/'}>
+        <Logo />
+      </NavLink>
       <NavLink to={'/profile'} className={styles.a}>
         {({ isActive }) => {
           return (
