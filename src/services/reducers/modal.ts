@@ -8,7 +8,7 @@ type TModalState = {
   data: TIngredient | null;
 };
 
-const initialState: TModalState = {
+export const initialState: TModalState = {
   data: null,
 };
 

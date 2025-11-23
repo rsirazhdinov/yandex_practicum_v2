@@ -37,7 +37,7 @@ export const getItemsReducer = (
         ...state,
         ingredients: action.payload,
         ingredientsHash: action.payload.reduce(
-          (accumulator, currentObject: TIngredient) => {
+          (accumulator: Record<string, TIngredient>, currentObject: TIngredient) => {
             accumulator[currentObject._id] = currentObject;
             return accumulator;
           },
