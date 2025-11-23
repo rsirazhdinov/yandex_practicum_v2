@@ -1,0 +1,34 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 584px;
+  padding: 24px;
+  background-color: #1c1c21;
+  border-radius: 40px;
+}
+
+.numberSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.number {
+  /* align-self: flex-start; */
+}
+
+.date {
+  /* align-self: flex-end; */
+}
+
+.iconListContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceContainer {
+  display: flex;
+}

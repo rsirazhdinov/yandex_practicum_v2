@@ -1,8 +1,8 @@
 import { Preloader } from '@krgaa/react-developer-burger-ui-components';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 
+import { useSelector } from '../../services/hooks';
 import BurgerCategory from '../burger-category/burger-category';
 
 import type { TIngredient } from '@/utils/types';
@@ -13,15 +13,13 @@ export default function BurgerIngredients(): React.JSX.Element {
   const [current, setCurrent] = React.useState<string>('bun');
 
   const ingredients: readonly TIngredient[] = useSelector(
-    //@ts-expect-error 'sprint-5'
     (store) => store?.ingredients?.ingredients
   );
 
   const ingredientsRequest = useSelector(
-    //@ts-expect-error 'sprint-5'
     (store) => store.ingredients.ingredientsRequest
   );
-  //@ts-expect-error 'sprint-5'
+
   const ingredientsFailed = useSelector((store) => store.ingredients.ingredientsFailed);
 
   const refNav = useRef<HTMLElement | null>(null);

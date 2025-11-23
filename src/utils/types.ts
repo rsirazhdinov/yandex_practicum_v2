@@ -36,8 +36,33 @@ export type TLogin = {
   user: TUser;
 };
 
+export type TOwner = {
+  createdAt: string;
+  email: string;
+  name: string;
+  updatedAt: string;
+};
+
+export type TOrder = {
+  createdAt: string;
+  ingredients: TIngredient[];
+  name: string;
+  number: number;
+  owner: TOwner;
+  price: number;
+  status: string;
+  updatedAt: string;
+  _id: string;
+};
+
+export type TGetOrder = {
+  success: boolean;
+  orders: TOrder[];
+};
+
 export type TSaveOrder = {
-  orderId: number;
+  name: string;
+  order: TOrder;
   success: boolean;
 };
 
@@ -50,3 +75,9 @@ export type TLogut = {
   success: boolean;
   message: string;
 };
+
+export enum OrderStatus {
+  done = 'Выполнен',
+  created = 'Создан',
+  pending = 'Готовится',
+}

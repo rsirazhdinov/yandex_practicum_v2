@@ -5,9 +5,10 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { patchUser } from '@services/actions/auth.js';
+
+import { useDispatch, useSelector } from '../../../services/hooks';
 
 import type { FormEvent } from 'react';
 import type React from 'react';
@@ -15,20 +16,19 @@ import type React from 'react';
 import styles from './profile-edit.module.css';
 
 export const ProfileEdit = (): React.JSX.Element => {
-  //@ts-expect-error 'sprint-5'
   const user = useSelector((store) => store.auth.user);
   const dispatch = useDispatch();
-  const [name, setName] = useState<string>(user.name || '');
-  const [email, setEmail] = useState<string>(user.email || '');
+  const [name, setName] = useState<string>(user?.name || '');
+  const [email, setEmail] = useState<string>(user?.email || '');
   const [password, setPassword] = useState<string>('');
-  //@ts-expect-error 'sprint-5'
+
   const patchUserRequest = useSelector((store) => store.auth.patchUserRequest);
-  //@ts-expect-error 'sprint-5'
+
   const patchUserFailed = useSelector((store) => store.auth.patchUserFailed);
 
   const resetForm = (): void => {
-    setName(user.name);
-    setEmail(user.email);
+    setName(user?.name || '');
+    setEmail(user?.email || '');
     setPassword('');
   };
 
@@ -36,7 +36,6 @@ export const ProfileEdit = (): React.JSX.Element => {
     e.preventDefault();
 
     dispatch(
-      //@ts-expect-error 'sprint-5'
       patchUser({
         name,
         email,
@@ -83,7 +82,7 @@ export const ProfileEdit = (): React.JSX.Element => {
         name={'email'}
         icon={'EditIcon'}
       />
-      {(name !== user.name || email !== user.email || password) && (
+      {(name !== user?.name || email !== user.email || password) && (
         <section className={styles.button_box}>
           <Button
             disabled={patchUserRequest}

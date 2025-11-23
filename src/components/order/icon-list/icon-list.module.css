@@ -1,0 +1,10 @@
+.iconListContainer {
+  display: flex;
+
+  /* position: relative; */
+}
+
+.item {
+  /* position: absolute; */
+  margin-left: -16px;
+}

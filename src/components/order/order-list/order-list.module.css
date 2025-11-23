@@ -1,0 +1,20 @@
+.mainContainer {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 16px;
+  height: 800px;
+  overflow: hidden auto;
+}
+
+.link {
+  /* position: relative;
+  display: flex;
+  flex-basis: 272px;
+  flex-flow: column wrap;
+  align-items: center;
+  color: white; */
+  text-decoration: none;
+
+  /* overflow-wrap: break-word; */
+}

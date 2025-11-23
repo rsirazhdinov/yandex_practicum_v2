@@ -28,8 +28,7 @@ export const ForgotPassword = (): React.JSX.Element => {
       email,
     })
       .then(() => {
-        //@ts-expect-error 'sprint-5'
-        localStorage.setItem('resetPassword', true);
+        localStorage.setItem('resetPassword', String(true));
         navigate('/reset-password');
       })
       .catch((e: string) => setError(e))

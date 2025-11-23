@@ -15,9 +15,28 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   SET_IS_AUTH_CHECKED,
-} from '@services/actions/auth.js';
+} from '@services/constants/auth';
 
-const initialState = {
+import type { TUser } from '@/utils/types';
+
+import type { TAuthActions } from '../actions/auth';
+
+type TAuthState = {
+  user: TUser | null;
+  isAuthChecked: boolean;
+  loginRequest: boolean;
+  loginFailed: boolean;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+  registerRequest: boolean;
+  registerFailed: boolean;
+  getUserRequest: boolean;
+  getUserFailed: boolean;
+  patchUserRequest: boolean;
+  patchUserFailed: boolean;
+};
+
+const initialState: TAuthState = {
   user: null,
   isAuthChecked: false,
   loginRequest: false,
@@ -31,7 +50,7 @@ const initialState = {
   patchUserRequest: false,
   patchUserFailed: false,
 };
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthState => {
   switch (action.type) {
     case GET_USER_REQUEST: {
       return {
@@ -133,7 +152,7 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_SUCCESS: {
       return {
         ...state,
-        user: action.user,
+        user: action.payload,
         registerRequest: false,
       };
     }

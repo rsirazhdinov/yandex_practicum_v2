@@ -1,5 +1,6 @@
 import type {
   TAuthToken,
+  TGetOrder,
   TGetUser,
   TIngredients,
   TLogin,
@@ -78,7 +79,9 @@ export const request = <T>(endpoint: string, options?: RequestInit): Promise<T> 
 export const fetchIngredients = (): Promise<TIngredients> =>
   request<TIngredients>('ingredients');
 
-export const saveOrder = (ingredientsIdArr: string[]): Promise<TSaveOrder> =>
+export const saveOrder = (
+  ingredientsIdArr: (string | undefined)[]
+): Promise<TSaveOrder> =>
   fetchWithRefresh<TSaveOrder>('orders', {
     method: 'POST',
     headers: {
@@ -91,8 +94,11 @@ export const saveOrder = (ingredientsIdArr: string[]): Promise<TSaveOrder> =>
     }),
   });
 
-const refreshToken = async (): Promise<TAuthToken> => {
-  const response = await request<TAuthToken>('/auth/token', {
+export const getOrder = (orderId: number): Promise<TGetOrder> =>
+  request<TGetOrder>(`orders/${orderId}`);
+
+export const refreshToken = async (): Promise<TAuthToken> => {
+  const response = await request<TAuthToken>('auth/token', {
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -108,7 +114,7 @@ const refreshToken = async (): Promise<TAuthToken> => {
 };
 
 type TFormLogin = {
-  name: string;
+  email: string;
   password: string;
 };
 

@@ -5,7 +5,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useRef, useState } from 'react';
 import { useDrop } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { BurgerConstructorBunEmpty } from '@components/burger-constructor-bun-empty/burger-constructor-bun-empty.jsx';
@@ -15,6 +14,7 @@ import { addItemConstructor } from '@services/actions/burger-constructor.js';
 import { saveOrderAction } from '@services/actions/order.js';
 import { getTotalPrice } from '@services/selectors/burger-constructor.js';
 
+import { useDispatch, useSelector } from '../../services/hooks';
 import { ingredientTypeArray } from '../../utils/burger-types';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
@@ -27,13 +27,11 @@ type TIngredietWithId = { id: number } & TIngredient;
 export default function BurgerConstructor(): React.JSX.Element {
   const [orderDetailsModalVisible, setOrderDetailsModalVisible] =
     useState<boolean>(false);
-  //@ts-expect-error 'sprint-5'
+
   const user = useSelector((store) => store?.auth?.user);
   const ingredients: readonly TIngredietWithId[] = useSelector(
-    //@ts-expect-error 'sprint-5'
     (store) => store?.burgerConstructor?.ingredients
   );
-  //@ts-expect-error 'sprint-5'
   const bun = useSelector((store) => store?.burgerConstructor?.bun);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,7 +62,7 @@ export default function BurgerConstructor(): React.JSX.Element {
       ...(ingredients?.map((item) => item._id) ?? []),
       bun?._id,
     ];
-    //@ts-expect-error 'sprint-5'
+
     dispatch(saveOrderAction(ingredientsIdArray));
   };
 

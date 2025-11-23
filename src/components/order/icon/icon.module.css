@@ -1,0 +1,26 @@
+.imgContainer {
+  position: relative;
+  display: flex; /* Включает Flexbox */
+  justify-content: center; /* Центрирует по горизонтали */
+  align-items: center; /* Центрирует по вертикали */
+  width: 64px;
+  height: 64px;
+  overflow: hidden; /* Обрезает всё, что выходит за пределы круга */
+  background-color: #1c1c21;
+  border: 2px solid #4c4cff;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.img {
+  width: auto;
+  max-height: 90%;
+}
+
+.over {
+  position: absolute;
+}
+
+.halfOpacity {
+  opacity: 0.3;
+}

@@ -1,17 +1,16 @@
 import { Preloader } from '@krgaa/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 
 import done_img from '../../images/done.png';
+import { useSelector } from '../../services/hooks';
 
 import orderDetailsStyles from './order-details.module.css';
 
 export default function OrderDetails(): React.JSX.Element {
   const { order, saveOrderRequest, saveOrderFailed } = useSelector((store) => ({
-    //@ts-expect-error 'sprint-5'
     order: store?.order?.saveOrderData?.order?.number,
-    //@ts-expect-error 'sprint-5'
+
     saveOrderRequest: store?.order?.saveOrderRequest,
-    //@ts-expect-error 'sprint-5'
+
     saveOrderFailed: store?.order?.saveOrderFailed,
   }));
   if (saveOrderRequest) {
