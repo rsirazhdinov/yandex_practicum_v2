@@ -33,7 +33,10 @@ export default function Modal({
 
   return createPortal(
     <ModalOverlay onClick={onClose}>
-      <div className={`pl-10 pr-10 pb-10 ${modalStyles.modal_popup}`}>
+      <div
+        data-testid="modal"
+        className={`pl-10 pr-10 pb-10 ${modalStyles.modal_popup}`}
+      >
         <div className={` pt-10  ${modalStyles.modal_header}`}>
           <p className="text text_type_main-large">{header}</p>
           <CloseIcon

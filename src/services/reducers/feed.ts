@@ -1,35 +1,3 @@
-// import { IFeedActions } from "../actions/feed";
-// import { TOrder } from "../types/feed";
-
-// export type TFeedState = {
-//     orders: Array<TOrder>;
-//     total: number;
-//     totalToday: number;
-//     error: string | null;
-
-// }
-
-// const initialState: TFeedState = {
-//     orders: [],
-//     total: 0,
-//     totalToday: 0,
-//     error: null
-// }
-
-// export const FeedReducer = (state = initialState, action: IFeedActions): TFeedState => {
-//     switch(action.type){
-//         case "FEED_ON_ERROR": {
-//             return {...state, error: action.payload}
-//         }
-//         case "FEED_ON_MESSAGE": {
-//             return {...state, total: action.payload.total, totalToday: action.payload.totalToday, orders: action.payload.orders, }
-//         }
-//         default: {
-//             return state
-//         }
-//     }
-// }
-
 import { createSlice } from '@reduxjs/toolkit';
 
 import { onErrorFeed, onMessageFeed } from '../actions/feed';
@@ -43,23 +11,12 @@ export type TFeedState = {
   error: string | null;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   orders: [],
   total: 0,
   totalToday: 0,
   error: null,
 };
-// export type LiveTableState = {
-//     status: WebsocketStatus;
-//     table: LiveTable;
-//     error: string | null;
-// }
-
-// const initialState: LiveTableState = {
-//     status: WebsocketStatus.OFFLINE,
-//     table: [],
-//     error: null,
-// }
 
 export const feedSlice = createSlice({
   name: 'Feed',

@@ -40,6 +40,7 @@ export const Login = (): React.JSX.Element => {
         <form className={styles.section_inputs} onSubmit={handleSubmitForm}>
           <p className=" mt-10 text text_type_main-medium">Вход</p>
           <EmailInput
+            data-testid="email_input"
             disabled={loginRequest}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -50,6 +51,7 @@ export const Login = (): React.JSX.Element => {
           />
           <PasswordInput
             disabled={loginRequest}
+            data-testid="password_input"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -62,6 +64,7 @@ export const Login = (): React.JSX.Element => {
             type="primary"
             size="medium"
             htmlType="submit"
+            data-testid="login_submit"
           >
             Войти
           </Button>

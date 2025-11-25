@@ -36,7 +36,7 @@ type TAuthState = {
   patchUserFailed: boolean;
 };
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   user: null,
   isAuthChecked: false,
   loginRequest: false,
