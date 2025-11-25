@@ -1,3 +1,5 @@
+Проект задеплоен по адресу https://rsirazhdinov.github.io/yandex_practicum_v2
+
 # Стартер на JavaScript для проекта Stellar Burger
 
 ## Процедура создания коммита с проверками

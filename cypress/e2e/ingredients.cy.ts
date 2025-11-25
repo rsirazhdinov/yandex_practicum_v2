@@ -1,34 +1,42 @@
+export const bun1 = 'Краторная булка N-200i';
+export const bun2= 'Флюоресцентная булка R2-D3';
+export const sauce = 'Соус Spicy-X';
+export const main = 'Биокотлета из марсианской Магнолии';
+
 /// <reference types="cypress" />
 
 describe('ingredients correclty work', () => {
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
     cy.intercept('GET', 'api/auth/user', { fixture: 'user.json' })
-    cy.visit('localhost:5173');
-    cy.get('[data-testid=contstructor_container]').as('drop');
-    // window.localStorage.setItem('accessToken', JSON.stringify('test-token'));
+    cy.visit('/');
+    cy.get('[data-testid=contstructor_container]').as('drop_place');
+    cy.get(`[data-testid="${bun1}"]`).as('bun1');
+    cy.get(`[data-testid="${bun2}"]`).as('bun2');
+
+
   })
 
   it('should drag bun', () => {
-    cy.get('[data-testid="Краторная булка N-200i"]').trigger('dragstart');
-    cy.get('@drop').trigger('drop');
-    cy.get('@drop').contains('Краторная булка N-200i').should('exist');
-    cy.get('@drop').children().should('contain', 'Краторная булка N-200i').and('contain', 'Краторная булка N-200i');
+    cy.get('@bun1').trigger('dragstart');
+    cy.get('@drop_place').trigger('drop');
+    cy.get('@drop_place').contains(bun1).should('exist');
+    cy.get('@drop_place').children().should('contain', bun1).and('contain', bun1);
 
-    cy.get('[data-testid="Флюоресцентная булка R2-D3"]').trigger('dragstart');
-    cy.get('@drop').trigger('drop');
-    cy.get('@drop').contains('Флюоресцентная булка R2-D3').should('exist');
-    cy.get('@drop').children().should('contain', 'Флюоресцентная булка R2-D3').and('contain', 'Флюоресцентная булка R2-D3');
-    cy.get('@drop').contains('Краторная булка N-200i').should('not.exist');
+    cy.get('@bun2').trigger('dragstart');
+    cy.get('@drop_place').trigger('drop');
+    cy.get('@drop_place').contains(bun2).should('exist');
+    cy.get('@drop_place').children().should('contain', bun2).and('contain', bun2);
+    cy.get('@drop_place').contains(bun1).should('not.exist');
   })
 
   it('should drag ingredient', () => {
-    cy.get('[data-testid="Соус Spicy-X"]').trigger('dragstart');
-    cy.get('@drop').trigger('drop');
-    cy.get('@drop').contains('Соус Spicy-X').should('exist');
+    cy.get(`[data-testid="${sauce}"]`).trigger('dragstart');
+    cy.get('@drop_place').trigger('drop');
+    cy.get('@drop_place').contains(sauce).should('exist');
 
-    cy.get('[data-testid="Биокотлета из марсианской Магнолии"]').trigger('dragstart');
-    cy.get('@drop').trigger('drop');
-    cy.get('@drop').contains('Биокотлета из марсианской Магнолии').should('exist');
+    cy.get(`[data-testid="${main}"]`).trigger('dragstart');
+    cy.get('@drop_place').trigger('drop');
+    cy.get('@drop_place').contains(main).should('exist');
   })
 });
