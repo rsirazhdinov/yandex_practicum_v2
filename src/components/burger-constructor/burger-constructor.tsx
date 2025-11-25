@@ -85,6 +85,7 @@ export default function BurgerConstructor(): React.JSX.Element {
 
   return (
     <section
+      data-testid="contstructor_container"
       ref={combinedRef}
       className={` ${styles.constructor_section} ${isHover ? styles.on_hover : ''} `}
     >
@@ -140,6 +141,7 @@ export default function BurgerConstructor(): React.JSX.Element {
           type="primary"
           size="medium"
           onClick={handleOpenOrderDetailsModal}
+          data-testid="create_order"
         >
           Оформить Заказ
         </Button>

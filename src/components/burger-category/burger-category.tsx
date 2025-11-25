@@ -30,6 +30,7 @@ export default function BurgerCategory({
         {ingredients &&
           ingredients.map((ingredient) => (
             <Link
+              data-testid={ingredient.name}
               className={styles.a}
               key={ingredient._id}
               to={`/ingredient/${ingredient._id}`}

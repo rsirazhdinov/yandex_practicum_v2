@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGI4OWRiNjczMDg2MDAxYmE4YjA5MSIsImlhdCI6MTc2Mzk3NzY4MiwiZXhwIjoxNzYzOTc4ODgyfQ.qetEOizklb098N0282NKIp1HD4PK33BXGr2uk7abQd8",
+    "refreshToken": "e349cd4d18b93867a00d470e0dd1f657c2c54e49f3bf4eacdf0b493ff35a27137c66c42145bcf666",
+    "user": {
+        "email": "ruslan.sirazhdinov@mail.ru",
+        "name": "ruslan222"
+    }
+}

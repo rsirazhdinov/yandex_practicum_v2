@@ -40,7 +40,7 @@ export default function AppHeader(): React.JSX.Element {
       <NavLink to={'/'}>
         <Logo />
       </NavLink>
-      <NavLink to={'/profile'} className={styles.a}>
+      <NavLink to={'/profile'} className={styles.a} data-testid="login_href">
         {({ isActive }) => {
           return (
             <MenuItem

@@ -21,6 +21,7 @@ export default function ModalOverlay({
 
   return (
     <div
+      data-testid="modal_overlay"
       onClick={handleOverlayClick}
       ref={refOverlay}
       className={modalOverlayStyles.modalOverlay}
